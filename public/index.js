@@ -7,5 +7,7 @@ socket.on('connect', function () {
 
 socket.on('message', function (data) {
   // $("body").animate({ backgroundColor : data }, 50);
-  $("#text").html(data).animate({ color : data }, 50);
+  $("#text").html(data)
+            .stop(false, false)
+            .animate({ color : data }, 50);
 });
