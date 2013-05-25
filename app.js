@@ -9,14 +9,20 @@ var express = require("express"),
     http = require("http"),
     server = http.createServer(app).listen(process.env.PORT),
     io = require("socket.io").listen(server)
-    ;
+    ; 
+
+// Last color
+var colors = [ "#F11E65", "#E0F11E", "#1EF18B", "#1EF1B8", "#F15A1E", "#461EF1", "#1E9AF1", "#8B1EF1", "#1ED1F1" ];
+var lastColor = colors[0];
 
 // Public
+// app.use(express.bodyParser());
 app.use('/public', express.static(__dirname + '/public'));
+app.use(express.favicon(__dirname + '/public/favicon.ico', { maxAge: 2592000000 }))
 
 // Basic page
 app.get('/', function (req, resp) {
-  resp.render('index.ejs');
+  resp.render('index.ejs', { lastColor : lastColor });
 });
 
 /* Sample a List
@@ -28,23 +34,19 @@ function sample (list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-function sampleN (list, n) {
-  if (n === undefined || n < 0)
-    n = 1;
-  if (!list.length)
-    return undefined;
-  var results = [];
-  for (var k = 0; k < n; k++)
-    results.push(list[Math.floor(Math.random() * list.length)]);
-  return results;
-}
 
 /*
  */
-function xo () {
-  var color = sample([ "red", "green", "blue" ]);
-  io.sockets.send(color);
+function sendColor () {
+
+  do {
+    color = sample(colors);
+  } while (lastColor === color);
+
+  lastColor = color;
+
+  io.sockets.send(lastColor);
 }
 
 // Xo
-setInterval(xo, 500);
+setInterval(sendColor, 2000);
