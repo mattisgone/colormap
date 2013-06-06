@@ -20,9 +20,19 @@ var lastColor = colors[0];
 app.use('/public', express.static(__dirname + '/public'));
 app.use(express.favicon(__dirname + '/public/favicon.ico', { maxAge: 2592000000 }))
 
-// Basic page
+// Base page
 app.get('/', function (req, resp) {
+  console.log(lastColor);
+  resp.render('map.ejs', { color: lastColor, lastColor : lastColor });
+});
+
+// Show new color
+app.get('/color', function (req, resp) {
   resp.render('index.ejs', { lastColor : lastColor });
+});
+
+// Display the map
+app.get('/map', function () {
 });
 
 /* Sample a List
@@ -39,6 +49,7 @@ function sample (list) {
  */
 function sendColor () {
 
+  // Sample until we get a new color...
   do {
     color = sample(colors);
   } while (lastColor === color);

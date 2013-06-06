@@ -1,7 +1,7 @@
 {
   "name": "color",
   "author": "Matt Owen",
-  "version": "0.0.1-8",
+  "version": "0.0.1-9",
   "description": "Displays website where colors change across all devices simultaneously",
   "main": "./app.js",
   "dependencies": {
