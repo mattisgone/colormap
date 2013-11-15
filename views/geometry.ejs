@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>geometry.xxx</title>
+    <link href="/public/geometry.css" rel="stylesheet" type="text/css">
+    <script src="/public/geometry.js" type="text/javascript"></script>
+    <style>
+      .post {
+        width: 400px;
+        margin: 0 auto;
+      }
+      nav {
+        position: fixed;
+        left: 60px;
+        font-size: 80%;
+        background-color: black;
+        color: white;
+        padding: 1.3em 1em;
+        width: 320px;
+        height: 180px;
+        display: table-cell;
+        vertical-align: middle;
+      }
+      nav ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+      }
+      nav ul li {
+        margin: 0 0 15px 0;
+      }
+      #square {
+        position: absolute;
+        right: 13px;
+        top: 10px;
+        height: 39px;
+        width: 30px;
+        background-color: transparent;
+      }
+    </style>
+
+    <!-- Needed to make colors work - remove these until there's only a single dependency... FIRST - remove jquery -->
+    <script src="/public/socket.io.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js" type="text/javascript"></script>
+    <script src="/public/color.js" type="text/javascript"></script>
+  </head>
+  <body>
+
+    <nav>
+      <div class="color-ui-bg" id="square"></div>
+      <div>
+        <ul>
+          <li>Up</li>
+          <li>CV</li>
+          <li>Companies</li>
+          <li></li>
+        </ul>
+      </div>
+      <hr size="1px" color="white">
+      <div>
+        <canvas id="pool"></canvas>
+      </div>
+    </nav>
+
+    <div class="post">
+      My brain says, I'm a searing pain.
+    </div>
+
+    <div class="post">
+      You'll be a walking disaster.
+    </div>
+
+  </body>
+</html>

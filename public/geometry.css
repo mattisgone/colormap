@@ -1,0 +1,25 @@
+@font-face {
+  font-family: DINWeb;
+  src: url("/public/DINWeb-Light.eot");
+  font-weight: 400;
+}
+@font-face {
+  font-family: DINWeb;
+  src: url("/public/DINWeb-Light.woff") format("woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: DINWeb;
+  src: url("/public/DINWeb.eot");
+  font-weight: 600;
+}
+@font-face {
+  font-family: DINWeb;
+  src: url("/public/DINWeb.woff") format("woff");
+  font-weight: 600;
+}
+body {
+  font-family: DINWeb;
+  font-size: 16pt;
+  font-weight: 400;
+}
