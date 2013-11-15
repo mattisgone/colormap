@@ -1,6 +1,8 @@
 /**
- * Parse Locations Twitter Feeds
- * 
+ * HTTP + WebSocket for ColorMap
+ * Implements color protocol
+ * @author Matt Owen
+ * @since 2013-06-08
  */
 
 // Frameworks
@@ -11,9 +13,8 @@ var express = require("express"),
     io = require("socket.io").listen(server)
     ; 
 
-// Last color
-var colors = [ "#F11E65", "#E0F11E", "#1EF18B", "#1EF1B8", "#F15A1E", "#461EF1", "#1E9AF1", "#8B1EF1", "#1ED1F1" ];
-var lastColor = colors[0];
+// Custom libs
+var colors = require("./colors");
 
 // Public
 // app.use(express.bodyParser());
@@ -35,29 +36,15 @@ app.get('/color', function (req, resp) {
 app.get('/map', function () {
 });
 
-/* Sample a List
- * @param list an array to sample
- * @param n an integer
- * @return a list of length <n> composed of elements from <list>
- */
-function sample (list) {
-  return list[Math.floor(Math.random() * list.length)];
-}
+app.get('/geometry', function (req, resp) {
+  resp.render('geometry.ejs', { key : "xxx", secret : "yyy" });
+});
 
+app.get('/geometry', function (req, resp) {
+  resp.render('client', { key : "xxx", secret : "yyy" });
+});
 
-/*
- */
-function sendColor () {
-
-  // Sample until we get a new color...
-  do {
-    color = sample(colors);
-  } while (lastColor === color);
-
-  lastColor = color;
-
-  io.sockets.send(lastColor);
-}
-
-// Xo
-setInterval(sendColor, 2000);
+// Send a new color every 2 seconds...
+setInterval(function () {
+  io.sockets.send(colors.next());
+}, 2000);
